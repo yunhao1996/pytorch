@@ -1,4 +1,4 @@
-#  构造神经网络，实现动态显示Regression回归
+#  构造神经网络，实现动态显示Regression回归（来源：莫烦Python）
 ```python
 import torch
 import matplotlib.pyplot as plt
