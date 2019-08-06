@@ -1,5 +1,5 @@
 # 程序来源：[DCGAN Tutorial](https://www.cnblogs.com/IvyWong/p/9203981.html)
-## 本文主要介绍了该程序的一些个人理解
+## 本文主要介绍了该程序的一些个人理解，只讲代码，相关运行结果没有。
 
 ### 1.导入工具包
 ```python
@@ -48,12 +48,12 @@ if os.path.exists(save_dir) is False:  # os.path.exit():验证括号内的路径
     os.makedirs(save_dir)  # 如果路径存在，创建路径文件。英文， make dirs:创建目录
 
 for i in range(60000):
-    image_array, label = train_data[i]
-    image_array = image_array.resize(28, 28)
-    filename = save_dir + '%d.jpg' % i
-    print(filename)
-    print(train_data.train_labels[i])
-    scipy.misc.toimage(image_array, cmin=0.0, cmax=1.0).save(filename)  
+    image_array, label = train_data[i]  # 获取信息train_data.train_data和train_data.train_label
+    image_array = image_array.resize(28, 28)  # 将每个图片的像素大小调整为28 x 28
+    filename = save_dir + '%d.jpg' % i  # 设置图片的路径，名字和格式
+    print(filename)  # 打印每张图片的详细地址
+    print(train_data.train_labels[i])  # 输出每张图片的标签。
+    scipy.misc.toimage(image_array, cmin=0.0, cmax=1.0).save(filename)  # 保存图片  
 ```
 *python*非常方便的一点还包括它的函数名字，有时候通过字面意思，便能够理解该函数的用法。这里讲解一下下载数据集这个程序。  
 
@@ -63,3 +63,7 @@ for i in range(60000):
 
 `train=True`: *MNIST*数据集下面包含两部分，测试集`train_data`和验证集`test_data`,两部分独立存在。该语句设置为`True`，意思为只下载测试集。设置为`False`,只下载验证集。顺便一提，比如测试集`train_data`,下面又有两个属性，包括`train_data.train_data`(图像数据，也就是常用的X)和`train_data.train_label`(每个图片对应标签，也就是图片表示的数，Y)
 
+程序的最后一步是保存图片，我使用的是`scipy.misc.toimage`,这个函数在*scipy*包1.2版本开始，已经取消，这里提出另一种方法：
+```python
+    scipy.misc.imsave(filename, image_array)
+```
