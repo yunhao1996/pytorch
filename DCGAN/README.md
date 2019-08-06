@@ -58,4 +58,5 @@ for i in range(60000):
 *python*非常方便的一点还包括它的函数名字，有时候通过字面意思，便能够理解该函数的用法。这里讲解一下下载数据集这个程序。  
 `torchvision.dataset.MNIST() `:从汉语意思上，*orchvision*数据集下面的*MNIST*。里面的一些常用参数：  
 `root='path'`: 设置的下载保存路径  
-`train=True`: *MNIST*数据集下面包含两部分，验证集train
+`train=True`: *MNIST*数据集下面包含两部分，测试集`train_data`和验证集`test_data`,两部分独立存在。该语句设置为`True`，意思为只下载测试集。设置为`False`,只下载验证集。顺便一提，比如测试集`train_data`,下面又有两个属性，包括`train_data.train_data`(图像数据，也就是常用的X)和`train_data.train_label`(每个图片对应标签，也就是图片表示的数，Y)
+
