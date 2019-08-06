@@ -93,10 +93,16 @@ for i in range(60000):
                                transform=transforms.Compose([  # 将多个转换函数组合起来使用
                                    transforms.Resize(image_size),  # 图像扩大为64×64，默认双线性插值
                                    transforms.ToTensor(),  # 将img转化为tensor张量,由（H,W,C）->(C,H,W),像素自动压缩到0-1
-                                   transforms.Normalize((0.1307, 0.1307, 0.1307), (0.3081, 0.3081, 0.3081)),  # 数据归一化，转化为-1->1之间，先减均值，在除以标准差
+                                   transforms.Normalize((0.1307, 0.1307, 0.1307), (0.3081, 0.3081, 0.3081)), 
                                ]))
+   dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,  # 设置批大小
+                                             shuffle=True, num_workers=workers)  # 打乱顺序，设置同时工作的子进程                            
 ```
-`torchvision.datasets.ImageFloder`:数据加载器，也可以通过字面意思简单的理解，处理加载图像的工具。这里面非常重要的参数就是`transform`,输入为图片，输出为处理后的图片。  `transforms.Normalize`:用于数据归一化处理，将前面0-1之间的像素值，再映射到-1 -> 1.   (0.1307, 0.1307, 0.1307)表示RGB每条通道的标准差std，(0.3081, 0.3081, 0.3081)表示RGB每条通道的均值mean。所有的值应该是0.5。这里的数值选择主要是根据网上的经验引用的，我自己的看法是，相比*celebA*数据集，*MNIST*数据集得到的图片像素范围过于单一，映射范围围绕0即可。一系列数据的映射范围的改变，只有一个目的，让模型收敛更稳定，避免过拟合。
+`torchvision.datasets.ImageFloder`:数据加载器，也可以通过字面意思简单的理解，处理加载图像的工具。这里面非常重要的参数就是`transform`,输入为图片，输出为处理后的数据。  `transforms.Normalize`:用于数据归一化处理，将前面0-1之间的像素值，再映射到-1 -> 1.   (0.1307, 0.1307, 0.1307)表示RGB每条通道的标准差std，(0.3081, 0.3081, 0.3081)表示RGB每条通道的均值mean。所有的值应该是0.5。这里的数值选择主要是根据网上的经验引用的，我自己的看法是，相比*celebA*数据集，*MNIST*数据集得到的图片像素范围过于单一，映射范围围绕0即可。一系列数据的映射范围的改变，只有一个目的，让模型收敛更稳定，避免过拟合。
+
+在*pytorch*的框架结构中，`torch.utils.data.DataLoader`基本都要用到，负责将数据进行随机的批处理， [为什么要batch_size？](https://blog.csdn.net/qq_42380515/article/details/87885996)
+
+
 
 
 
