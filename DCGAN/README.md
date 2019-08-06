@@ -40,7 +40,7 @@ import os  # 处理文件和目录的包
 
 DOWNLOAD_MNIST = False  
 
-train_data = torchvision.datasets.MNIST(root='./mnist/',   train=True,transform=torchvision.transforms.ToTensor(),
+train_data = torchvision.datasets.MNIST(root='./mnist/', train=True, transform=torchvision.transforms.ToTensor(),
         download=DOWNLOAD_MNIST)  #下载，处理数据集
 
 save_dir = "mnist/ras/"  # 设置图片路径，绝对路径和相对路径都可以
@@ -56,4 +56,6 @@ for i in range(60000):
     scipy.misc.toimage(image_array, cmin=0.0, cmax=1.0).save(filename)  
 ```
 *python*非常方便的一点还包括它的函数名字，有时候通过字面意思，便能够理解该函数的用法。这里讲解一下下载数据集这个程序。  
-`torchvision.dataset.MNIST() `:从汉语意思上，*orchvision*数据集下面的*MNIST*
+`torchvision.dataset.MNIST() `:从汉语意思上，*orchvision*数据集下面的*MNIST*。里面的一些常用参数：  
+`root='path'`: 设置的下载保存路径  
+`train=True`: *MNIST*数据集下面包含两部分，验证集train
