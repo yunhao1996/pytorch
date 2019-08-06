@@ -30,10 +30,28 @@ torch.manual_seed(manualSeed)
 ```
 程序中存在许多随机产生
 
+### 3.定义参数
+```python
+dataroot = "./mnist/raw"  # 数据集的根目录
+workers = 2  # DataLoader进行数据预处理及数据加载使用进程数
+batch_size = 128  # 一次batch进入模型的图片数目
+image_size = 64  # 原始图片重采样进入模型前的大小
+nc = 3  # 输入图像中颜色通道的数目。对于彩色图像
+nz = 100  # 初始噪音向量的大小
+ngf = 64  # 生成网络中基础feature数目
+ndf = 64  # 判别网络中基础feature数目
+num_epochs = 5  # 训练5次全部样本
+lr = 0.0002  # 学习率
+beta1 = 0.5  # 使用Adam优化算法中的β1参数值
+ngpu = 1  # 可用的GPU数量
+```
+集合具体程序理解参数的
+
 ### 3.数据集处理
 由于电脑太过垃圾，我选择了把*celebA*数据集换成了*MNIST*,为了偷懒，不过多改参数，我的处理方法是将*MNIST*数据输出为图片进行保存。
 #### a.将MNIST转化为图片
 ```python
+# 该程序单独放在一个.py文件中
 import torchvision  # mnist数据集就在这里
 import scipy.misc
 import os  # 处理文件和目录的包
@@ -61,9 +79,11 @@ for i in range(60000):
 
 `root='path'`: 设置的下载保存路径  
 
-`train=True`: *MNIST*数据集下面包含两部分，测试集`train_data`和验证集`test_data`,两部分独立存在。该语句设置为`True`，意思为只下载测试集。设置为`False`,只下载验证集。顺便一提，比如测试集`train_data`,下面又有两个属性，包括`train_data.train_data`(图像数据，也就是常用的X)和`train_data.train_label`(每个图片对应标签，也就是图片表示的数，Y)
+`train=True`: *MNIST*数据集下面包含两部分，测试集`train_data`和验证集`test_data`,两部分独立存在。该语句设置为`True`，意思为只下载测试集。设置为`False`,只下载验证集。顺便一提，比如测试集`train_data`,下面又有两个属性，包括`train_data.train_data`(图像数据，也就是常用的X)和`train_data.train_label`(图片表示的数字，标签Y)
 
 程序的最后一步是保存图片，我使用的是`scipy.misc.toimage`,这个函数在*scipy*包1.2版本开始，已经取消，这里提出另一种方法：
 ```python
     scipy.misc.imsave(filename, image_array)
 ```
+
+#### b.数据
