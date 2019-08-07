@@ -197,7 +197,7 @@ if __name__ == '__main__':
         classname = m.__class__.__name__  # 返回m的名字
         # 如果if满足条件，不会运行elif.
         if classname.find('Conv') != -1:  # 查找classname是否含有字符‘Conv’,有，返回0；没有，返回-1。所以和-1进行比较
-           # 将m.weight.data初始化为均值为0，方差为0.02均匀分布中的随机变量,应用于卷积
+           # 将m.weight.data初始化为均值为0，方差为0.02正态分布中的随机变量,应用于卷积
            nn.init.normal_(m.weight.data, 0.0, 0.02)
         elif classname.find('BatchNorm') != -1:  # 应用在网络层批量归一化中
             nn.init.normal_(m.weight.data, 1.0, 0.02)
