@@ -92,6 +92,7 @@ for epoch in range(EPOCH):
             correct = 0
             test_output = cnn(test_x)  # （[2000，10]）
             # 按照行进行取最大值,[1],返回最大值的每个索引值，也就是说，可能性比较大
+            # 为[1]返回索引值，即第几个数，为[0]返回最大的数
             pred_y = torch.max(test_output, 1)[1].numpy()
             correct += sum(pred_y == test_y.numpy())
             accuracy = correct/ 2000
