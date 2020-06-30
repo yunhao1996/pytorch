@@ -1,0 +1,19 @@
+SEED: 999            # random seed
+GPU: [0]             # list of gpu ids
+
+TRAIN_PATH: ./datasets/train # the path of dataset train
+TEST_PATH: ./datasets/test   # the path of dataset test
+LOG_DIR: ./checkpoints/1/runs
+
+EPOCH: 13
+LR: 0.001                    # learning rate
+BATCH_SIZE: 1                # input batch size for training
+RESIZE: 224                   # resnet:96  vgg:224
+CROP: 224                     # resnet:96  vgg:224
+MEAN: [0.5, 0.5, 0.5]  # the mean of datasets
+STD: [0.5, 0.5, 0.5]   # the std of datasets
+DEVICE: 1                    # choose cpu or gpu
+MILESTONES: [3,6,9]          # the decay of rate
+WARM: 1                      # warmup
+SAVE_EPOCH: 1                # save model
+

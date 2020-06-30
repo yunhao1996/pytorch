@@ -1,0 +1,17 @@
+MODE: 1             # 1: train, 2: test, 3: eval
+SEED: 10            # random seed
+GPU: [0]            # list of gpu ids
+
+TRAIN_PATH: ./datasets/train/
+TEST_PATH: ./datasets/train/
+RUN_PATH:  ./checkpoints/1/runs
+
+BATCH_SIZE: 1                 # input batch size for training
+EPOCH: 40
+INPUT_SIZE: 256               # input image size for training 0 for original size
+LR: 0.0002
+DEVICE: 1                    # choose cpu or gpu
+
+SAVE_ITER: 1               # 多少次迭代保存一次图片
+SAVE_EPOCH:  5               # 多少次循环保存一次模型
+

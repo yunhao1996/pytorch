@@ -1,0 +1,18 @@
+代码运行：
+train:
+先修改 main.py 第20行， 确保default = 'train'
+运行命令： python main.py
+代码运行的图片的保存在 checkpoints/1/sample 中， 每50次迭代保存一次，
+模型保存在 checkpoints/1/model 中。
+
+test：
+先修改 main.py 第20行， 确保default = 'test'
+生成的图片在 checkpoints/1/test_output 中，里面有三个文件夹。
+
+测分 PSNR 和 SSIM:
+python ./score/metrics.py --data-path ./checkpoints/1/test_output/gt/ --output-path ./checkpoints/1/test_output/pred/
+
+
+可视化loss曲线：
+tensorboard --logdir=./runs
+
